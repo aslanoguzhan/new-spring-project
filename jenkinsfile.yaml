@@ -1,0 +1,17 @@
+pipeline {
+    agent any
+   
+    stages {
+        stage("build project") {
+            steps {
+               // git 'https://github.com/aslanoguzhan/new-spring-project.git'
+                echo "Java VERSION"
+            
+                echo "Maven VERSION"
+                
+                echo 'building project...'
+                
+            }
+        }
+    }
+}
