@@ -1,5 +1,6 @@
 package com.newproject.controller;
 
+import com.newproject.dto.UserDto;
 import com.newproject.entity.User;
 import com.newproject.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -16,8 +17,8 @@ public class UserController {
         this.userService = userService;
     }
     @PostMapping("/create")
-    public ResponseEntity<User> createUser (@RequestBody User user){
-        User resultUser =userService.createUser(user);
+    public ResponseEntity<UserDto> createUser (@RequestBody UserDto user){
+        UserDto resultUser =userService.createUser(user);
         return ResponseEntity.ok(resultUser);
     }
 

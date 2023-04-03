@@ -1,12 +1,13 @@
 package com.newproject.service;
 
+import com.newproject.dto.UserDto;
 import com.newproject.entity.User;
 
 import java.util.List;
 
 public interface UserService {
 
-    User createUser(User user);
+    UserDto createUser(UserDto user);
     List<User> getUsers();
     User getUser(Long id);
 
