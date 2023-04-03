@@ -3,6 +3,10 @@ package com.newproject.controller;
 import com.newproject.dto.UserDto;
 import com.newproject.entity.User;
 import com.newproject.service.UserService;
+import com.newproject.util.CustomPage;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Slice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -23,8 +27,8 @@ public class UserController {
     }
 
     @GetMapping("/getAll")
-    public ResponseEntity<List<User>> getUsers (){
-       List<User> users= userService.getUsers();
+    public ResponseEntity<List<UserDto>> getUsers (){
+       List<UserDto> users= userService.getUsers();
        return ResponseEntity.ok(users);
     }
     @GetMapping("/getById/{id}")
@@ -42,5 +46,22 @@ public class UserController {
         Boolean status=userService.deleteUser(id);
         return  ResponseEntity.ok(status);
    }
+   @GetMapping("/pagination")
+   public ResponseEntity<Page<User>>  pagination(@RequestParam int currentPage,@RequestParam int pageSize){
+    return ResponseEntity.ok(userService.pagination(currentPage,pageSize));
+   }
+    @GetMapping("/pagination/v1")
+    public ResponseEntity<Page<User>>  pagination(Pageable pageable){
+        return ResponseEntity.ok(userService.pagination(pageable));
+    }
+
+    @GetMapping("/pagination/v2")
+    public ResponseEntity<Slice<User>>  slice(Pageable pageable){
+        return ResponseEntity.ok(userService.slice(pageable));
+    }
+    @GetMapping("/pagination/v3")
+    public ResponseEntity<CustomPage<UserDto>>  customPagination(Pageable pageable){
+        return ResponseEntity.ok(userService.customPagination(pageable));
+    }
 
 }
